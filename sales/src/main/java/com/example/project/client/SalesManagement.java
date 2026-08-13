@@ -152,6 +152,11 @@ public class SalesManagement {
 
     private void updateCustomer() throws SQLException {
         int id = customerForm.getId();
+        ArrayList<Integer> arrayListID = customerDAO.selectAllID();
+        if (!checkID(id, arrayListID)) {
+            System.out.println("ID not found");
+            return;
+        }
         Customer customer = customerForm.getCustomer();
         if (customerDAO.update(id, customer)) {
             System.out.println("Successful");
@@ -162,6 +167,11 @@ public class SalesManagement {
 
     private void removeCustomer() throws SQLException {
         int id = customerForm.getId();
+        ArrayList<Integer> arrayListID = customerDAO.selectAllID();
+        if (!checkID(id, arrayListID)) {
+            System.out.println("ID not found");
+            return;
+        }
 
         if (customerDAO.delete(id)) {
             System.out.println("Successful");
@@ -179,10 +189,11 @@ public class SalesManagement {
             return;
         }
 
-        for (Employee employee  : employees) {
+        for (Employee employee : employees) {
             System.out.println(employee);
         }
     }
+
     private void addEmployee() throws SQLException {
         Employee employee = employeeForm.getEmployee();
 
@@ -193,8 +204,15 @@ public class SalesManagement {
         }
     }
 
-    private void updateEmployee() throws SQLException {
+    private void updateEmployee() throws SQLException { //
         int id = employeeForm.getId();
+        // kiem tra id co ton tai khong
+        ArrayList<Integer> arrayListID = employeeDAO.selectAllID();
+        if (!checkID(id, arrayListID)) {
+            System.out.println("ID not found");
+            return;
+        }
+
         Employee employee = employeeForm.getEmployee();
         if (employeeDAO.update(id, employee)) {
             System.out.println("Successful");
@@ -205,12 +223,22 @@ public class SalesManagement {
 
     private void removeEmployee() throws SQLException {
         int id = employeeForm.getId();
+        ArrayList<Integer> arrayListID = employeeDAO.selectAllID();
+        if (!checkID(id, arrayListID)) {
+            System.out.println("ID not found");
+            return;
+        }
 
         if (employeeDAO.delete(id)) {
             System.out.println("Successful");
         } else {
             System.out.println("Unsuccessful");
         }
+    }
+
+    // ham check id ton tai
+    private boolean checkID(int id, ArrayList<Integer> arrayListID) {
+        return arrayListID.contains(id);
     }
 
 }

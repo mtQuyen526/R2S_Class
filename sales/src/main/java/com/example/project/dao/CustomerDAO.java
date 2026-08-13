@@ -117,4 +117,23 @@ public class CustomerDAO {
 
         return false;
     }
+
+    public ArrayList<Integer> selectAllID() throws SQLException {
+        ArrayList<Integer> ids = new ArrayList<>();
+
+        String sql = "SELECT employee_id FROM employees";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                ids.add(rs.getInt("employee_id"));
+            }
+        }
+
+        return ids;
+    }
 }
+
+
+// sử dung procedue như thế nào.
