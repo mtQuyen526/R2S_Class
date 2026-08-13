@@ -49,4 +49,24 @@ public class Employee {
     public void setSupervisor(int supervisor) {
         this.supervisor = supervisor;
     }
+
+    @Override
+    public String toString() {
+        if (supervisor == 0)
+            return "Employee{" +
+                    "id=" + id +
+                    ", lastName='" + lastName + '\'' +
+                    ", firstName='" + firstName + '\'' +
+                    ", birthdate='" + birthdate + '\'' +
+                    ", supervisor= null" +
+                    '}';
+        else
+            return "Employee{" +
+                    "id=" + id +
+                    ", lastName='" + lastName + '\'' +
+                    ", firstName='" + firstName + '\'' +
+                    ", birthdate='" + birthdate + '\'' +
+                    ", supervisor=" + supervisor +
+                    '}';
+    }
 }
